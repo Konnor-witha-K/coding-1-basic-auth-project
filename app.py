@@ -73,22 +73,18 @@ def register():
 
 @app.route("/dashboard")
 def dashboard():
+
     if "user" not in session:
         return redirect(url_for("login"))
-    # else:
-    #     conn = get_db()
-    #     try:
-    #         entries = conn.execute(
-    #                 "SELECT * FROM entries WHERE user=?",
-    #                 (session["user"],)
-    #             ).fetchall()
-    #     finally:
-    #         conn.close()
 
-    # return render_template("dashboard.html", entries=entries, username=session["user"])
+    conn = get_db()
+    entries = conn.execute(
+        "SELECT * FROM entries WHERE user=?",
+        (session["user"],)
+    ).fetchall()
+    conn.close()
 
-    # TEMPORARY (remove later)
-    return render_template("secret.html", username=session["user"])
+    return render_template("dashboard.html", entries=entries, username=session["user"])
 
 
 # ---------- CREATE ----------
@@ -98,6 +94,7 @@ def dashboard():
 # - Save data to the database (POST)
 # - Redirect back to dashboard
 # NOTE: Remove the triple """ before and after each route to 'uncomment'
+
 @app.route("/create", methods=["GET", "POST"])
 def create():
     if "user" not in session:

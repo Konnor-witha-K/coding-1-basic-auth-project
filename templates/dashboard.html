@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h2>Your Dashboard</h2>
+
+<h3>Welcome, {{ username }}!</h3>
+
+<p><a href="{{ url_for('create') }}"><button>Create New Entry</button></a></p>
+
+{% if entries %}
+    {% for entry in entries %}
+        <div class="entry-card">
+            <h3>{{ entry['title'] }}</h3>
+            <p>{{ entry['content'] }}</p>
+            <p>
+                <a href="/edit/{{ entry['id'] }}">Edit</a>
+                |
+                <a href="/delete/{{ entry['id'] }}">Delete</a>
+            </p>
+        </div>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No entries yet! Create one to get started.</p>
+{% endif %}
+
+<br>
+
+<a href="{{ url_for('logout') }}"><button>Logout</button></a>
+
+{% endblock %}
