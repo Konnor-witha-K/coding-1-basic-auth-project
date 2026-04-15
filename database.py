@@ -19,14 +19,8 @@ def init_db():
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             title TEXT,
             content TEXT,
-            user TEXT
-        )
-    """)
-    conn.execute("""
-        CREATE TABLE IF NOT EXISTS holidays (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT UNIQUE,
-            date TEXT
+            user TEXT,
+            UNIQUE(title, user)
         )
     """)
     conn.commit()

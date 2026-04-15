@@ -8,24 +8,15 @@
 
 <p><a href="{{ url_for('create') }}"><button>Create New Entry</button></a></p>
 
-<h3>Holidays</h3>
-{% if holidays %}
-    <ul>
-    {% for holiday in holidays %}
-        <li><strong>{{ holiday['name'] }}</strong> — {{ holiday['date'] }}</li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No holidays available.</p>
-{% endif %}
-
-<hr>
 
 {% if entries %}
     {% for entry in entries %}
         <div class="entry-card">
             <h3>{{ entry['title'] }}</h3>
             <p>{{ entry['content'] }}</p>
+            {% if entry['user'] == 'default' %}
+                <p><em>Default entry shown to all users.</em></p>
+            {% endif %}
             <p>
                 <a href="/edit/{{ entry['id'] }}">Edit</a>
                 |

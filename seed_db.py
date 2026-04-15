@@ -26,14 +26,31 @@ def seed_database():
         ("charlie", "MyPassword789#"),
     ]
     
-    # Sample holidays with dates
-    sample_holidays = [
-        ("Christmas Day", "December 25th"),
-        ("New Year's Day", "January 1st"),
-        ("Independence Day", "July 4th"),
+    # Sample default entries for all users
+    sample_entries = [
+        ("Christmas Day", "December 25th", "default"),
+        ("New Year's Day", "January 1st", "default"),
+        ("Independence Day", "July 4th", "default"),
     ]
 
     try:
+        # Remove duplicate entries that were created by earlier seed runs
+        conn.execute(
+            """
+            DELETE FROM entries
+            WHERE id NOT IN (
+                SELECT MIN(id)
+                FROM entries
+                GROUP BY title, content, user
+            )
+            """
+        )
+
+        # Ensure future duplicate default entries cannot be inserted
+        conn.execute(
+            "CREATE UNIQUE INDEX IF NOT EXISTS idx_entries_title_user ON entries(title, user)"
+        )
+
         for username, password in sample_users:
             hashed_pw = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
             conn.execute(
@@ -42,12 +59,12 @@ def seed_database():
             )
             print(f"Created user: {username}")
 
-        for name, date in sample_holidays:
+        for title, content, user in sample_entries:
             conn.execute(
-                "INSERT OR IGNORE INTO holidays (name, date) VALUES (?, ?)",
-                (name, date)
+                "INSERT OR IGNORE INTO entries (title, content, user) VALUES (?, ?, ?)",
+                (title, content, user)
             )
-            print(f"Added holiday: {name}")
+            print(f"Added default entry: {title}")
 
         conn.commit()
         print("\nDatabase seeding complete!")

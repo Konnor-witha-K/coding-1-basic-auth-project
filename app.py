@@ -79,18 +79,19 @@ def dashboard():
 
     conn = get_db()
     entries = conn.execute(
-        "SELECT * FROM entries WHERE user=?",
+        """
+        SELECT MIN(id) AS id, title, content, user
+        FROM entries
+        WHERE user=? OR user='default'
+        GROUP BY title, content, user
+        """,
         (session["user"],)
-    ).fetchall()
-    holidays = conn.execute(
-        "SELECT * FROM holidays"
     ).fetchall()
     conn.close()
 
     return render_template(
         "dashboard.html",
         entries=entries,
-        holidays=holidays,
         username=session["user"]
     )
 
