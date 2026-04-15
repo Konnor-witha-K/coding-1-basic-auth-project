@@ -1,7 +1,3 @@
-# Before running, make sure to run in the terminal:
-# pip install bcrypt
-# pip install flask
-
 from flask import Flask, request, redirect, url_for, render_template, session
 from database import get_db, init_db
 import bcrypt
@@ -38,7 +34,7 @@ def login():
 
         if user and bcrypt.checkpw(password.encode("utf-8"), user["password"]):
             session["user"] = username
-            return redirect(url_for("secret"))
+            return redirect(url_for("dashboard"))
         else:
             error = "Incorrect username or password"
 
@@ -75,28 +71,20 @@ def register():
 
     return render_template("register.html", error=error)
 
-@app.route("/secret")
-def secret():
-    # TODO: RENAME THIS ROUTE TO /dashboard
-
+@app.route("/dashboard")
+def dashboard():
     if "user" not in session:
         return redirect(url_for("login"))
+    # else:
+    #     conn = get_db()
+    #     try:
+    #         entries = conn.execute(
+    #                 "SELECT * FROM entries WHERE user=?",
+    #                 (session["user"],)
+    #             ).fetchall()
+    #     finally:
+    #         conn.close()
 
-    # TODO: Connect to the database
-    # conn = get_db()
-
-    # TODO: Get all entries that belong to the logged-in user
-    # Example:
-    # entries = conn.execute(
-    #     "SELECT * FROM entries WHERE user=?",
-    #     (session["user"],)
-    # ).fetchall()
-
-    # TODO: Close the connection
-    # conn.close()
-
-    # TODO: Pass entries into your template
-    # Example:
     # return render_template("dashboard.html", entries=entries, username=session["user"])
 
     # TEMPORARY (remove later)
@@ -110,26 +98,28 @@ def secret():
 # - Save data to the database (POST)
 # - Redirect back to dashboard
 # NOTE: Remove the triple """ before and after each route to 'uncomment'
-"""
 @app.route("/create", methods=["GET", "POST"])
 def create():
     if "user" not in session:
         return redirect(url_for("login"))
 
     if request.method == "POST":
-        # TODO: Get form data (title, content)
+        title = request.form["title"].strip()
+        content = request.form["content"].strip()
 
-        # TODO: Connect to database
-
-        # TODO: Insert into entries table
-        # IMPORTANT: include session["user"]
-
-        # TODO: Commit and close
+        conn = get_db()
+        try:
+            conn.execute(
+                "INSERT INTO entries (title, content, user) VALUES (?, ?, ?)",
+                (title, content, session["user"])
+            )
+            conn.commit()
+        finally:
+            conn.close()
 
         return redirect(url_for("dashboard"))
 
     return render_template("create.html")
-"""
 
 # ---------- UPDATE ----------
 # TODO: Create a route like /edit/<id>
