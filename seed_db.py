@@ -26,15 +26,29 @@ def seed_database():
         ("charlie", "MyPassword789#"),
     ]
     
+    # Sample holidays with dates
+    sample_holidays = [
+        ("Christmas Day", "December 25th"),
+        ("New Year's Day", "January 1st"),
+        ("Independence Day", "July 4th"),
+    ]
+
     try:
         for username, password in sample_users:
             hashed_pw = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
             conn.execute(
-                "INSERT INTO users (username, password) VALUES (?, ?)",
+                "INSERT OR IGNORE INTO users (username, password) VALUES (?, ?)",
                 (username, hashed_pw)
             )
             print(f"Created user: {username}")
-        
+
+        for name, date in sample_holidays:
+            conn.execute(
+                "INSERT OR IGNORE INTO holidays (name, date) VALUES (?, ?)",
+                (name, date)
+            )
+            print(f"Added holiday: {name}")
+
         conn.commit()
         print("\nDatabase seeding complete!")
     

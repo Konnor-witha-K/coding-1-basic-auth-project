@@ -82,9 +82,17 @@ def dashboard():
         "SELECT * FROM entries WHERE user=?",
         (session["user"],)
     ).fetchall()
+    holidays = conn.execute(
+        "SELECT * FROM holidays"
+    ).fetchall()
     conn.close()
 
-    return render_template("dashboard.html", entries=entries, username=session["user"])
+    return render_template(
+        "dashboard.html",
+        entries=entries,
+        holidays=holidays,
+        username=session["user"]
+    )
 
 
 # ---------- CREATE ----------

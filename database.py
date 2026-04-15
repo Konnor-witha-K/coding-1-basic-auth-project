@@ -22,5 +22,12 @@ def init_db():
             user TEXT
         )
     """)
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS holidays (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT UNIQUE,
+            date TEXT
+        )
+    """)
     conn.commit()
     conn.close()
