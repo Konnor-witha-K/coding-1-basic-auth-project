@@ -24,6 +24,7 @@ def seed_database():
         ("alice", "Password123!"),
         ("bob", "SecurePass456@"),
         ("charlie", "MyPassword789#"),
+        ("Josephus", "21St@rb0y!"), #Admin user, memorable so Konnor won't forget the password
     ]
     
     # Sample default entries for all users
