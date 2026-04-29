@@ -96,14 +96,6 @@ def dashboard():
     )
 
 
-# ---------- CREATE ----------
-# TODO: Create a route like /create
-# This page should:
-# - Show a form (GET)
-# - Save data to the database (POST)
-# - Redirect back to dashboard
-# NOTE: Remove the triple """ before and after each route to 'uncomment'
-
 @app.route("/create", methods=["GET", "POST"])
 def create():
     if "user" not in session:
@@ -167,20 +159,28 @@ def edit(id):
 # - Delete an entry from the database
 # - Redirect back to dashboard
 
-"""
+
 @app.route("/delete/<int:id>")
 def delete(id):
     if "user" not in session:
         return redirect(url_for("login"))
 
     # TODO: Connect to database
+    conn = get_db()
 
     # TODO: Delete entry WHERE id AND user
-
-    # TODO: Commit and close
+    try:
+        conn.execute(
+            "DELETE FROM entries WHERE id=? AND user=?", 
+            (id, session["user"])
+        )
+        conn.commit()
+    finally:
+        conn.close()
 
     return redirect(url_for("dashboard"))
-"""
+
+    return render_template("delete.html")
 
 
 @app.route("/logout")
