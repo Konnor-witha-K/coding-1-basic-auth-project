@@ -6,16 +6,18 @@
 <!-- TODO: Create a form that sends a POST request -->
 
 <form method="POST">
+    <div>
 
+    </div>
     <!-- TODO: Pre-fill title using entry data -->
     <!-- Hint: value="{{ entry['title'] }}" -->
 
     <!-- TODO: Pre-fill content using entry data -->
 
-    <!-- TODO: Add submit button -->
+    <button type="submit">Update Entry</button>
 
 </form>
 
-<!-- TODO: Add a link back to dashboard -->
+<p><a href="{{ url_for('dashboard') }}">Back to dashboard</a></p>
 
 {% endblock %}

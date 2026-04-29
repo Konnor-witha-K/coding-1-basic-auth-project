@@ -178,7 +178,7 @@ def delete(id):
     finally:
         conn.close()
 
-    return redirect(url_for("dashboard"))
+    # return redirect(url_for("dashboard"))
 
     return render_template("delete.html")
 
