@@ -160,27 +160,28 @@ def edit(id):
 # - Redirect back to dashboard
 
 
-@app.route("/delete/<int:id>")
+@app.route("/delete/<int:id>", methods=["GET", "POST"])
 def delete(id):
     if "user" not in session:
         return redirect(url_for("login"))
 
-    # TODO: Connect to database
-    conn = get_db()
+    if request.method == "POST":
+        # TODO: Connect to database
+        conn = get_db()
 
-    # TODO: Delete entry WHERE id AND user
-    try:
-        conn.execute(
-            "DELETE FROM entries WHERE id=? AND user=?", 
-            (id, session["user"])
-        )
-        conn.commit()
-    finally:
-        conn.close()
+        # TODO: Delete entry WHERE id AND user
+        try:
+            conn.execute(
+                "DELETE FROM entries WHERE id=? AND user=?", 
+                (id, session["user"])
+            )
+            conn.commit()
+        finally:
+            conn.close()
 
-    # return redirect(url_for("dashboard"))
+        return redirect(url_for("dashboard"))
 
-    return render_template("delete.html")
+    return render_template("delete.html", id=id)
 
 
 @app.route("/logout")
