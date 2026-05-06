@@ -119,13 +119,6 @@ def create():
 
     return render_template("create.html")
 
-# ---------- UPDATE ----------
-# TODO: Create a route like /edit/<id>
-# This page should:
-# - Load existing data
-# - Show it in a form
-# - Update the database on submit
-
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
@@ -169,12 +162,6 @@ def edit(id):
     
     conn.close()
     return render_template("edit.html", entry=entry)
-
-# ---------- DELETE ----------
-# TODO: Create a route like /delete/<id>
-# This should:
-# - Delete an entry from the database
-# - Redirect back to dashboard
 
 
 @app.route("/delete/<int:id>", methods=["GET", "POST"])
