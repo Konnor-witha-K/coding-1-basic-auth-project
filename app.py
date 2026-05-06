@@ -169,6 +169,10 @@ def edit(id):
     
     conn.close()
     return render_template("edit.html", entry=entry)
+<<<<<<< HEAD
+=======
+"""
+>>>>>>> bc51b27 (.)
 
 # ---------- DELETE ----------
 # TODO: Create a route like /delete/<id>
