@@ -171,7 +171,7 @@ def edit(id):
     return render_template("edit.html", entry=entry)
 <<<<<<< HEAD
 =======
-"""
+
 >>>>>>> bc51b27 (.)
 
 # ---------- DELETE ----------
