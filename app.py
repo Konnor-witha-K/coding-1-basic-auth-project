@@ -125,10 +125,8 @@ def edit(id):
     if "user" not in session:
         return redirect(url_for("login"))
 
-    # TODO: Connect to database
     conn = get_db()
 
-    # TODO: Get entry WHERE id AND user
     entry = conn.execute(
         "SELECT * FROM entries WHERE id=? AND user=?",
         (id, session["user"])
@@ -142,14 +140,7 @@ def edit(id):
     if request.method == "POST":
         title = request.form["title"].strip()
         content = request.form["content"].strip()
-        # TODO: Get updated form data
-        
-        # TODO: Update database
-        
-        # IMPORTANT: include id AND session["user"]
-
-        # TODO: Commit and close
-
+    
         conn.execute(
             "UPDATE entries SET title=?, content=? WHERE id=? AND user=?",
             (title, content, id, session["user"]) 
@@ -162,10 +153,7 @@ def edit(id):
     
     conn.close()
     return render_template("edit.html", entry=entry)
-#<<<<<<< HEAD
-
-
-#>>>>>>> bc51b27 (.)
+    
 
 
 @app.route("/delete/<int:id>", methods=["GET", "POST"])
