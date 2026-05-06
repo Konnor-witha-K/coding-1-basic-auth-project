@@ -158,11 +158,16 @@ def edit(id):
         # TODO: Commit and close
 
         conn.execute(
-            "UPDATE entries SET title=?, content=? WHERE id=?" 
+            "UPDATE entries SET title=?, content=? WHERE id=? AND user=?",
+            (title, content, id, session["user"]) 
         )
+        
+        conn.commit()
+        conn.close
 
         return redirect(url_for("dashboard"))
-
+    
+    conn.close()
     return render_template("edit.html", entry=entry)
 """
 
