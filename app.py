@@ -164,7 +164,6 @@ def edit(id):
         return redirect(url_for("dashboard"))
 
     return render_template("edit.html", entry=entry)
-"""
 
 # ---------- DELETE ----------
 # TODO: Create a route like /delete/<id>
