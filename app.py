@@ -8,6 +8,13 @@ app.secret_key = "supersecretkey"
 
 init_db()
 
+# Sample default entries for all users
+sample_entries = [
+    ("Christmas Day", "December 25th"),
+    ("New Year's Day", "January 1st"),
+    ("Independence Day", "July 4th"),
+]
+
 # ---------- PASSWORD VALIDATION ----------
 def is_valid_password(password):
     return (
@@ -60,6 +67,14 @@ def register():
                     "INSERT INTO users (username, password) VALUES (?, ?)",
                     (username, hashed_pw)
                 )
+
+                # Add default entries for the new user
+                for title, content in sample_entries:
+                    conn.execute(
+                        "INSERT OR IGNORE INTO entries (title, content, user) VALUES (?, ?, ?)",
+                        (title, content, username)
+                    )
+
                 conn.commit()
 
                 return redirect(url_for("login"))
@@ -79,12 +94,7 @@ def dashboard():
 
     conn = get_db()
     entries = conn.execute(
-        """
-        SELECT MIN(id) AS id, title, content, user
-        FROM entries
-        WHERE user=? OR user='default'
-        GROUP BY title, content, user
-        """,
+        "SELECT * FROM entries WHERE user=?",
         (session["user"],)
     ).fetchall()
     conn.close()
