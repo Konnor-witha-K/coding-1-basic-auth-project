@@ -36,3 +36,23 @@ button {
 .error {
     color: red;
 }
+
+
+<style>
+    .calendar {
+        display:grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+        margin-top: 20px;
+    }
+    .day-box {
+        border: 1px solid #ccc;
+        padding: 8px;
+        min-height: 100px;
+        background : #f7f7f7;
+    }
+    .day-number {
+        font-weight: bold;
+        margin
+    }
+</style>
