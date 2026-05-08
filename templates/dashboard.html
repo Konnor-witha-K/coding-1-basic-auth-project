@@ -1,14 +1,4 @@
-{% extends "base.html" %}
-
-{% block content %}
-
-<h2>Your Dashboard</h2>
-
-<h3>Welcome, {{ username }}!</h3>
-
-<p><a href="{{ url_for('create') }}"><button>Create New Entry</button></a></p>
-
-
+<!--
 {% if entries %}
     {% for entry in entries %}
         <div class="entry-card">
@@ -28,9 +18,19 @@
 {% else %}
     <p>No entries yet! Create one to get started.</p>
 {% endif %}
+-->
 
-<br>
-
-<a href="{{ url_for('logout') }}"><button>Logout</button></a>
-
-{% endblock %}
+<style>
+    .calendar {
+        display:grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 8px;
+        margin-top: 20px;
+    }
+    .day-box {
+        border: 1px solid #ccc;
+        padding: 8px;
+        min-height: 100px;
+        background : #f7f7f7;
+    }
+</style>
