@@ -29,24 +29,12 @@ def seed_database():
     
     # Sample default entries for all users
     sample_entries = [
-        ("Christmas Day", "December 25th", "default"),
-        ("New Year's Day", "January 1st", "default"),
-        ("Independence Day", "July 4th", "default"),
+        ("Christmas Day", "December 25th"),
+        ("New Year's Day", "January 1st"),
+        ("Independence Day", "July 4th"),
     ]
 
     try:
-        # Remove duplicate entries that were created by earlier seed runs
-        conn.execute(
-            """
-            DELETE FROM entries
-            WHERE id NOT IN (
-                SELECT MIN(id)
-                FROM entries
-                GROUP BY title, content, user
-            )
-            """
-        )
-
         # Ensure future duplicate default entries cannot be inserted
         conn.execute(
             "CREATE UNIQUE INDEX IF NOT EXISTS idx_entries_title_user ON entries(title, user)"
@@ -60,12 +48,13 @@ def seed_database():
             )
             print(f"Created user: {username}")
 
-        for title, content, user in sample_entries:
-            conn.execute(
-                "INSERT OR IGNORE INTO entries (title, content, user) VALUES (?, ?, ?)",
-                (title, content, user)
-            )
-            print(f"Added default entry: {title}")
+        for username, _ in sample_users:
+            for title, content in sample_entries:
+                conn.execute(
+                    "INSERT OR IGNORE INTO entries (title, content, user) VALUES (?, ?, ?)",
+                    (title, content, username)
+                )
+                print(f"Added default entry: {title} for {username}")
 
         conn.commit()
         print("\nDatabase seeding complete!")

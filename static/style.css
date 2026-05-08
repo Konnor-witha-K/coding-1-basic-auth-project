@@ -26,6 +26,13 @@ button {
     color: white;
     border: none;
 }
+.button {
+    padding: 10px;
+    width: 40%;
+    background: #4CAF50;
+    color: white;
+    border: none;
+}
 .error {
     color: red;
 }
