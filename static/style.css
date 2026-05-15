@@ -3,16 +3,20 @@ body {
     font-family: Arial, sans-serif;
     background: #f4f6f8;
     display: flex;
-    justify-content: left;
-    align-items: left;
-    height: 100vh;
+    justify-content: flex-start;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
 }
 .card {
     background: white;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    width: 300px;
+    width: min(95%, 1100px);
+    max-width: 1100px;
+    margin: 0 auto;
     text-align: left;
 }
 input {
@@ -26,6 +30,8 @@ button {
     background: #4CAF50;
     color: white;
     border: none;
+    border-radius: 6px;
+    cursor: pointer;
 }
 .button {
     padding: 10px;
@@ -38,28 +44,66 @@ button {
     color: red;
 }
 
-/* Calender stuff */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 30% 70%;
+    gap: 24px;
+    align-items: start;
+}
+.entries-panel,
+.calendar-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.dashboard-header h2,
+.calendar-panel h2 {
+    margin-top: 0;
+}
+.entry-card {
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+.calendar-panel {
+    background: #f8fbff;
+    padding: 18px;
+    border-radius: 12px;
+    border: 1px solid #dde6f0;
+}
 .calendar {
-    display:grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 8px;
-    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 8px;
 }
-.day-box {
-    border: 1px solid #ccc;
-    padding: 8px;
-    min-height: 100px;
-    background : #f7f7f7;
-}
-.day-number {
-    font-weight: bold;
-    /* margin */
+.day-box,
+.day-box2 {
+    border: 1px solid #cbd5e1;
+    padding: 12px;
+    box-sizing: border-box;
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    background: #ffffff;
+    border-radius: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    text-align: left;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+    font-size: 14px;
 }
 
-/* .calendar {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
+.day-box2 {
+    color: #797e87;
 }
-.first-day {
-  grid-column-start: 3;
-} */
+.dashboard-footer {
+    margin-top: 12px;
+}
+@media (max-width: 900px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
