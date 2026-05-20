@@ -5,35 +5,37 @@ APP PLANNING & DESIGN
 1. PROJECT IDEA
 -------------------------
 - What is your app called? Calendar web app 
-- What type of app is it? (journal, listings, notes, etc.) reminder app 
+- What type of app is it? (journal, listings, notes, etc.) Reminder app 
 - What will users use your app for? User can add reminders and edit or delete them when plans change.
 It's basically just for keep track of important days. 
 
 2. DATA MODEL (WHAT ARE YOU STORING?)
 -------------------------
-- What is a single “entry” in your app? one reminder 
-- What fields will each entry have? (title, content, date, etc.) tile and 
-- How will entries be connected to a user?
+- What is a single “entry” in your app? One reminder 
+- What fields will each entry have? (title, content, date, etc.) Tile and content (which for the dates)
+- How will entries be connected to a user? Each entry has a user field so the databases only shows reminder that belong to each user. 
 
 3. CORE FEATURES (CRUD)
 -------------------------
-- What can users CREATE?
-- What will they see on the main page (READ)?
-- What can users EDIT (UPDATE)?
-- What can users DELETE?
+- What can users CREATE? User can create new reminders 
+- What will they see on the main page (READ)? The dashboard shows the month and date and on the left is where you will see the reminders, also add new one or edit, and delete 
+- What can users EDIT (UPDATE)? Users can edit the title and content of any reminder they made. 
+- What can users DELETE? Users can delete reminders that they dont want. 
 
 4. USER FLOW
 -------------------------
-- What happens after a user logs in?
-- What pages/routes will your app need? (dashboard, create, edit, etc.)
-- Describe a typical user experience from login → using your app
+- What happens after a user logs in? The user goes straight to dashboard after logged in and they will see the calendar with their reminders. 
+- What pages/routes will your app need? (dashboard, create, edit, etc.) login if have account if dont then sign up for one, dashboard with calendar, create, edit, and delete. 
+- Describe a typical user experience from login → using your app 
+Users logs in, sees their calendar, click the create entry button, and edit or deletes reminder when needed. 
 
 5. USER EXPERIENCE (UX)
 -------------------------
-- How should your app look and feel?
-- How will users navigate between pages?
-- How will entries be displayed (list, cards, etc.)?
+- How should your app look and feel? simple and easy to read 
+- How will users navigate between pages? The button like edit, or create entry or delete 
+- How will entries be displayed (list, cards, etc.)? reminder shows next to the calendar 
 
 6. OPTIONAL FEATURES
 -------------------------
-- What extra features might you add? (search, tags, sorting, etc.)
+- What extra features might you add? (search, tags, sorting, etc.) 
+We added the calendar to the right side but it doesn't really do anything just for visual. 
