@@ -4,14 +4,15 @@ APP PLANNING & DESIGN
 
 1. PROJECT IDEA
 -------------------------
-- What is your app called?
-- What type of app is it? (journal, listings, notes, etc.)
-- What will users use your app for?
+- What is your app called? Calendar web app 
+- What type of app is it? (journal, listings, notes, etc.) reminder app 
+- What will users use your app for? User can add reminders and edit or delete them when plans change.
+It's basically just for keep track of important days. 
 
 2. DATA MODEL (WHAT ARE YOU STORING?)
 -------------------------
-- What is a single “entry” in your app?
-- What fields will each entry have? (title, content, date, etc.)
+- What is a single “entry” in your app? one reminder 
+- What fields will each entry have? (title, content, date, etc.) tile and 
 - How will entries be connected to a user?
 
 3. CORE FEATURES (CRUD)
