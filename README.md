@@ -4,7 +4,7 @@
 
 When you finish, add your names and a demo video link here, then submit one link to your project repository.
 
-**Group Members:** (list all group members here)  
+**Group Members:** Konnor Watkins, Thy Ho
 * [Demo Video (1 per group)](http://includeyourlinkhere)
 
 ---
@@ -21,16 +21,6 @@ Your application must allow users to:
 - Delete data
 
 Each user should only be able to access and modify **their own data**.
-
----
-
-### Helpful Links for This Unit:
- - [Flask Documentation](https://flask.palletsprojects.com/en/2.3.x/)
- - [SQLite Documentation](https://www.sqlite.org/docs.html)
- - [Bcrypt Documentation](https://pypi.org/project/bcrypt/)
- - [Regex Tutorial for Python](https://docs.python.org/3/library/re.html)
- - [GitHub Cheat-Sheet](https://education.github.com/git-cheat-sheet-education.pdf)
- - [Flask Tutorial](https://www.youtube.com/watch?t=347&v=Z1RJmh_OqeA) (we are already in a virtual environment so ignore comments about env)
 
 ---
 
